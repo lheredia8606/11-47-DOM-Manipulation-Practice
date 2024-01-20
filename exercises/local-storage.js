@@ -51,12 +51,11 @@ function callBackFunc(e){
     if (isFav(e.target)){
       e.target.style.background = 'white';
       favs.splice(favs.indexOf(e.target.id),1);
-      localStorage.setItem('favs',favs.join(','))
     } else {
       e.target.style.background = 'red';
       favs.push(e.target.id)
-      localStorage.setItem('favs',favs.join(','))
     }
+    localStorage.setItem('favs',favs.join(','))
   }
 }
 
