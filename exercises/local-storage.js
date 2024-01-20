@@ -36,5 +36,40 @@
  * * /~/ do that to a specific item that has a specific class value
  * * add the event listener to the container, pass the callback.
  */
+const cardContainer = document.querySelector('.cardsContainer');
+const cards = document.querySelectorAll('.card');
+let favs = localStorage.getItem('favs').split(',');
+favs.forEach((fav)=>{
+  const element = document.getElementById(fav);
+  if(element){
+    element.style.background = 'red';
+  }
+});
 
-// Your code goes here...
+function callBackFunc(e){
+  if(Array.from(cards).includes(e.target)){
+    if (isFav(e.target)){
+      e.target.style.background = 'white';
+      favs.splice(favs.indexOf(e.target.id),1);
+      localStorage.setItem('favs',favs.join(','))
+    } else {
+      e.target.style.background = 'red';
+      favs.push(e.target.id)
+      localStorage.setItem('favs',favs.join(','))
+    }
+  }
+}
+
+function isFav(element){
+  let flag = false;
+  favs.forEach((fav)=>{
+    if(element.id == fav){
+      flag =  true
+    }
+  });
+  return flag;
+}
+
+cardContainer.addEventListener('click', callBackFunc);
+
+

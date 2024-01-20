@@ -11,7 +11,7 @@
  * Example: const allItems = <Your code>;
  */
 
-// Your code goes here...
+const allItems = document.querySelectorAll('.item');
 
 
 
@@ -20,9 +20,9 @@
  * Select all sort buttons by class of "sortBtn" as a NodeList.
  * Store them in the sortBtn variable
  * Example: const sortBtn = <Your code>;
- */
+*/
 
-// Your code goes here...
+const sortBtn = document.querySelectorAll('.sortBtn');
 
 
 
@@ -37,9 +37,16 @@
  * Example: sortData('asc') => <a-z order of items in the main container>
  */
 
-// Your code goes here...
+function sortData(direction){
+  const container = document.getElementById('main');
+  container.removeChild(...allItems);
+  const arrAllItems = Array.from(allItems);
+  arrAllItems.sort( (a,b) => direction === 'desc'? b.id - a.id : a.id - b.id );
 
-
+  arrAllItems.forEach((element)=>{
+    container.appendChild(element);
+  });
+}
 
 /**
  * @task
@@ -49,6 +56,10 @@
  * * Make the sortData function call, assign the item's dataset sortdir property
  */
 
-// Your code goes here...
+ sortBtn.forEach((element)=>{
+  element.addEventListener('click', ()=>{
+    sortData(element.dataset.sortdir);
+  });
+ });
 
 

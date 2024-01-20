@@ -11,7 +11,7 @@
  * Example: const allItems = <Your code>;
  */
 
-// Your code goes here...
+const allItems = document.querySelectorAll('#main .item');
 
 
 
@@ -22,7 +22,8 @@
  * Example: const main = <Your code>
  * */
 
-// Your code goes here
+//not used
+const main = document.getElementById('main');
 
 
 
@@ -33,7 +34,8 @@
  * Example: const favs = <Your code>;
  */
 
-// Your code goes here
+//not used
+const favs = document.getElementById('favs');
 
 
 
@@ -46,7 +48,19 @@
  * Changes the icon of the element: fa-heart-circle-plus for main, fa-heart-crack for favs items.
  */
 
-// Your code goes here
+function updateCollections(element){
+  const parent = element.parentNode;
+  const newParent = parent.id === 'main'? document.getElementById('favs') : document.getElementById('main');
+  const iconClass = newParent.id === 'main' ? 'fa-heart-circle-plus' : 'fa-heart-crack';
+  //i got cunfussed because i dont know why i have to do
+  // .nextElementSibling, the first child is <i>
+  //could you explain that for me please
+  const icon = element.firstChild.nextElementSibling;
+  icon.classList.remove(...icon.classList);
+  icon.classList.add('fa-solid', iconClass);
+  parent.removeChild(element);
+  newParent.appendChild(element);
+}
 
 
 
@@ -64,6 +78,10 @@
  * * Make the updateCollections function call, assign the item Id and the direction defined above
  */
 
-// Your code goes here...
+  allItems.forEach((element) =>{
+    element.addEventListener('click', (e) =>{
+      updateCollections(e.target);
+    });
+  });
 
 
