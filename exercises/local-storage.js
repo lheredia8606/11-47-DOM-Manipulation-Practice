@@ -38,7 +38,8 @@
  */
 const cardContainer = document.querySelector('.cardsContainer');
 const cards = document.querySelectorAll('.card');
-let favs = localStorage.getItem('favs').split(',');
+const storedFavs = localStorage.getItem('favs');
+let favs = storedFavs ? storedFavs.split(',') : [];
 favs.forEach((fav)=>{
   const element = document.getElementById(fav);
   if(element){
